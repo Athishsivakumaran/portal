@@ -22,7 +22,8 @@ from datetime import date
 
 headers={'api_key':'a5d759ef-abb3-4204-8be3-190f13155abf'}
 
-DATABASE_URL = "sqlite:///db_directory/testdb.sqlite3"
+DATABASE_URL = "postgresql://portaladmission_user:iEx9gsNESchTu62T3BSyYfnqr5ga7uSV@dpg-co9dkgi0si5c739at92g-a/portaladmission"
+
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
