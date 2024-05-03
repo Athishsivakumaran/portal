@@ -463,5 +463,3 @@ async def stud_det_post(request:Request,form_data: FormData2):
 
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
