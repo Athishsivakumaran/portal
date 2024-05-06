@@ -5,7 +5,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
-from sqlalchemy import create_engine, Column, Integer, String,LargeBinary,DateTime
+from sqlalchemy import create_engine, Column, Integer, String,LargeBinary,DateTime,BigInteger,Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import requests
@@ -19,20 +19,23 @@ import google.generativeai as genai
 from pydantic import BaseModel
 from typing import Optional
 from datetime import date
+from sqlalchemy.sql import func
 
 headers={'api_key':'a5d759ef-abb3-4204-8be3-190f13155abf'}
+DATABASE_URL = "postgresql://athish:#portal123@demopost.postgres.database.azure.com:5432/postgres"
 
-DATABASE_URL = "postgresql://portaladmission_user:iEx9gsNESchTu62T3BSyYfnqr5ga7uSV@dpg-co9dkgi0si5c739at92g-a/portaladmission"
 
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
 class Student_Eligibility(Base):
     __tablename__ = "student_eligibility"
+    created_date=Column(Date, server_default=func.current_date())
+
     email_id=Column(String,primary_key=True, index=True)
-    ph_no = Column(Integer)
+    ph_no = Column(BigInteger)
     first_subject= Column(String)
     first_subject_marks_obtained= Column(Integer)
     first_subject_total_marks= Column(Integer)
@@ -47,26 +50,28 @@ class Student_Eligibility(Base):
     fourth_subject_total_marks= Column(Integer) 
     Stream= Column(String)
     Eligibility=Column(String)
+    created_date=Column(Date, server_default=func.current_date())
 class Student_Details(Base):
-    __tablename__ = "student_details"
+    __tablename__ = "student_details"        
+    created_date=Column(Date, server_default=func.current_date())
     email_id = Column(String, primary_key=True, index=True)
     name = Column(String)
     address = Column(String)
     pincode = Column(Integer)
     nationality = Column(String)
     exam_center = Column(String)
-    aadhar_no = Column(Integer)
+    aadhar_no = Column(BigInteger)
     email = Column(String)
     gender = Column(String)
-    dob = Column(DateTime)
+    dob = Column(Date)
     age = Column(Integer)
     religion = Column(String)
     community = Column(String)
     caste = Column(String)
     mother_tongue = Column(String)
-    ph_no = Column(Integer)
-    father_ph_no = Column(Integer)
-    mother_ph_no = Column(Integer)
+    ph_no = Column(BigInteger)
+    father_ph_no = Column(BigInteger)
+    mother_ph_no = Column(BigInteger)
     father_name = Column(String)
     father_occupation = Column(String)
     father_income = Column(Integer)
@@ -74,7 +79,7 @@ class Student_Details(Base):
     mother_occupation = Column(String)
     mother_income = Column(Integer)
     _10th_exam_name = Column(String)
-    _10th_register_no = Column(String)
+    _10th_register_no = Column(BigInteger)
     _10th_passing_date = Column(String)
     _10th_attempts = Column(Integer)
     _10th_maths_marks = Column(Integer)
@@ -101,6 +106,10 @@ class Student_Details(Base):
     _12th_marksheet = Column(LargeBinary)
     community_certificate = Column(LargeBinary)
     passport_photo = Column(LargeBinary)
+    preference1=Column(String)
+    preference2=Column(String)
+    preference3=Column(String)
+    preference4=Column(String)
     transaction = Column(LargeBinary)
 class FormData1(BaseModel):
     email_id: Optional[str]
@@ -172,6 +181,10 @@ class FormData2(BaseModel):
     _12th_marksheet : Optional[bytes]
     community_certificate : Optional[bytes]
     passport_photo : Optional[bytes]
+    preference1: Optional[str]
+    preference2: Optional[str]
+    preference3: Optional[str]
+    preference4: Optional[str]
     transaction : Optional[bytes]
   
 Base.metadata.create_all(bind=engine)
@@ -196,7 +209,7 @@ async def read_item(request: Request):
     if user:
         return templates.TemplateResponse("Home.html", {"request": request,"email_id":user["email"]})
     else:
-        return 'You need to <a href="/login">Login with Google</a> to access this page.'
+        return templates.TemplateResponse("sign.html", {"request": request})
 
 @app.get("/login")
 async def login(request: Request):
@@ -241,7 +254,7 @@ async def stud_det_post(request:Request):
             await client.post(internal_api_url,data=json.dumps(dict(form_data)),headers=headers)
     except httpx.HTTPError as e:
         raise HTTPException(status_code=500, detail="Internal server error")
-    return templates.TemplateResponse("personaldetails.html", {"request": request})
+    return templates.TemplateResponse("success.html", {"request": request})
 
 
 @app.post("/",response_class=HTMLResponse)
@@ -277,6 +290,7 @@ async def validate_data(request:Request,form_data: FormData1):
         db.commit()
         db.refresh(new_student if not existing_student else existing_student)
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail="Internal server error")
     return {"message": "Data validated successfully", "form_data": "fwegf"}
 
@@ -463,3 +477,5 @@ async def stud_det_post(request:Request,form_data: FormData2):
 
 
 
+if __name__=="__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)

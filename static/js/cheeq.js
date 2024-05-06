@@ -29,7 +29,6 @@ function submitForm() {
 function refresh() {
   var elg = document.getElementById("eligibility");
   var eligib = document.getElementById("eligib");
-
   elg.innerText = "";
   eligib.value = "No";
 }

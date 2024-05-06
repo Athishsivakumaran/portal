@@ -114,7 +114,7 @@
                                     <div class="col-md-4 mb-3 ">
                                         <label for="community_category">Exam Centre</label>
                                         <select class="form-select" aria-label="Community Category" id="5"
-                                            name="exam_center">
+                                            name="exam_center" required>
                                             <option selected disabled>Select a Exam Centre</option>
                                             <option value="Chennai">Chennai</option>
                                             <option value="Madurai">Madurai</option>
@@ -172,7 +172,7 @@
                                     <div class="col-md-3 mb-3 ">
                                         <label for="religion">Religion</label>
                                         <select class="form-select" aria-label="Religion" name="religion"
-                                            value="Buddhism">
+                                            value="Buddhism" required>
                                             <option selected disabled>Select a religion</option>
                                             <option value="Buddhism">Buddhism</option>
                                             <option value="Christianity">Christianity</option>
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3 ">
                                         <label for="community_category">Community Category</label>
-                                        <select class="form-select" aria-label="Community Category" name="community">
+                                        <select class="form-select" aria-label="Community Category" name="community" required>
                                             <option selected disabled>Select a Community Category</option>
                                             <option value="OC">OC</option>
                                             <option value="BC">BC</option>
@@ -263,7 +263,7 @@
                                     <div class="col-md-6 mb-3 ">
                                         <label for="mother_income">Mother's Annual Income</label>
                                         <input type="tel" class="form-control" id="mother_income" name="mother_income"
-                                            placeholder="Enter Mother's Income">
+                                            placeholder="Enter Mother's Income" required>
                                     </div>
                                 </div>
                             </div>
@@ -360,10 +360,9 @@
                                         <h3>Upload 12th Marksheet</h3>
                                         <h4>Select File here</h4>
                                         <p>Files Supported: PDF</p>
-                                        <input type="file" accept=".pdf" id="12th_marksheet" name="_12th_marksheet"
-                                            style="display:none;" required>
-                                        <button type="button"onclick="document.getElementById('12th_marksheet').click()" class="btn btn-primary btn-red-outline btn-block mb-4">Choose
-                                            File</button>
+                                        <input type="file" class="btn-red-outline btn-block mb-4"  accept=".pdf" id="12th_marksheet" name="_12th_marksheet" required>
+
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3 card">
@@ -372,9 +371,8 @@
                                         <h4>Select File here</h4>
                                         <p>Files Supported: PNG, JPG, PDF</p>
                                         <input type="file" accept=".png,.jpg,.pdf" id="commun_certifi" 
-                                            name="community_certificate" style="display:none;" required>
-                                        <button type="button" onclick="document.getElementById('commun_certifi').click()"  class="btn btn-primary btn-red-outline btn-block mb-4">Choose
-                                            File</button>
+                                            name="community_certificate" class="btn-red-outline btn-block mb-4" required>
+                                       
                                     </div>
                                 </div>
                                 <div class="col-md-4 mb-3 card">
@@ -382,16 +380,15 @@
                                         <h3>Upload Passport Size Photo</h3>
                                         <h4>Select File here</h4>
                                         <p>Files Supported: PNG, JPG, PDF</p>
-                                        <input type="file" accept=".png,.jpg,.pdf" id="pasport_photo"
-                                            name="passport_photo" style="display:none;" required>
-                                        <button type="button" onclick="document.getElementById('pasport_photo').click()"  class="btn btn-primary btn-red-outline btn-block mb-4">Choose
-                                            File</button>
-                                    </div>
+                                         <input type="file" accept=".png,.jpg,.pdf" id="pasport_photo"
+                                            name="passport_photo" class="btn-red-outline btn-block mb-4" required>
+                                                                                </div>
                                 </div>
                             </div>
-                            <h5 style="text-align: center;">Course Preference</h5>
-                            <hr class="hr border-dark">
-                            <div id="coursePrefernce"></div>
+                            
+                            <div id="coursePrefernce">
+                                
+                            </div>
                             <br><br>
                         </div>
                     </div>
@@ -402,13 +399,12 @@
                         <br>
                         <div class="tab-content ">
                             <img src="static/img/upi.jpg" alt="" class="upiImage"><br><br>
-                            <div class="drop_box">
+                            <div class="drop_box" >
                                 <h3>Transaction Upload</h3>
                                 <p>Files Supported: PNG, JPG, PDF</p>
                                 <input type="file" accept=".png,.jpg,.pdf" id="transac"
-                                    name="transaction" style="display:none;" required>
-                                <button type="button" onclick="document.getElementById('transac').click()" class="btn btn-primary btn-red-outline btn-block mb-4">Choose
-                                    File</button>
+                                    name="transaction" class="btn-red-outline btn-block mb-4" style="width:250px;" required>
+                                
                             </div>
 
                         </div>
