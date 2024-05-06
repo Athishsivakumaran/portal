@@ -23,6 +23,13 @@ from sqlalchemy.sql import func
 
 headers={'api_key':'a5d759ef-abb3-4204-8be3-190f13155abf'}
 DATABASE_URL = "postgresql://athish:#portal123@demopost.postgres.database.azure.com:5432/postgres"
+<<<<<<< HEAD
+=======
+
+
+DATABASE_URL = "postgresql://portaladmission_9hl7_user:KBqP20RogZ5S2rQ58gAVSbnesDRBwP1l@dpg-coq6mbdjm4es73aga62g-a/portaladmission_9hl7"
+
+>>>>>>> 886b09829b94fbacf12b7cff745e66934e759682
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -480,5 +487,5 @@ async def stud_det_post(request:Request,form_data: FormData2):
 
 
 
-if __name__=="__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+# if __name__=="__main__":
+#     uvicorn.run(app, host="127.0.0.1", port=8000)
