@@ -23,12 +23,6 @@ from sqlalchemy.sql import func
 
 headers={'api_key':'a5d759ef-abb3-4204-8be3-190f13155abf'}
 DATABASE_URL = "postgresql://athish:#portal123@demopost.postgres.database.azure.com:5432/postgres"
-
-<<<<<<< HEAD
-=======
-DATABASE_URL = "postgresql://portaladmission_9hl7_user:KBqP20RogZ5S2rQ58gAVSbnesDRBwP1l@dpg-coq6mbdjm4es73aga62g-a/portaladmission_9hl7"
->>>>>>> 812b6807ee3b54c7c611366a7545209922abde9c
-
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -82,32 +76,32 @@ class Student_Details(Base):
     mother_name = Column(String)
     mother_occupation = Column(String)
     mother_income = Column(Integer)
-    _10th_exam_name = Column(String)
-    _10th_register_no = Column(BigInteger)
-    _10th_passing_date = Column(String)
-    _10th_attempts = Column(Integer)
-    _10th_maths_marks = Column(Integer)
-    _10th_science_marks = Column(Integer)
-    _10th_total_marks = Column(Integer)
-    _10th_max_marks = Column(Integer)
-    _10th_school_address = Column(String)
+    tenth_exam_name = Column(String)
+    tenth_register_no = Column(BigInteger)
+    tenth_passing_date = Column(Date)
+    tenth_attempts = Column(Integer)
+    tenth_maths_marks = Column(Integer)
+    tenth_science_marks = Column(Integer)
+    tenth_total_marks = Column(Integer)
+    tenth_max_marks = Column(Integer)
+    tenth_school_address = Column(String)
     Stream = Column(String)
-    _12th_subject1= Column(String)
-    _12th_subject1_marks_obtained = Column(Integer)
-    _12th_subject1_total_marks = Column(Integer)
-    _12th_subject2= Column(String)
-    _12th_subject2_marks_obtained = Column(Integer)
-    _12th_subject2_total_marks = Column(Integer)
-    _12th_subject3= Column(String)
-    _12th_subject3_marks_obtained = Column(Integer)
-    _12th_subject3_total_marks = Column(Integer)
-    _12th_subject4= Column(String)
-    _12th_subject4_marks_obtained = Column(Integer)
-    _12th_subject4_total_marks = Column(Integer)
-    _12th_subject5= Column(String)
-    _12th_subject5_marks_obtained = Column(Integer)
-    _12th_subject5_total_marks = Column(Integer)
-    _12th_marksheet = Column(LargeBinary)
+    twelfth_subject1= Column(String)
+    twelfth_subject1_marks_obtained = Column(Integer)
+    twelfth_subject1_total_marks = Column(Integer)
+    twelfth_subject2= Column(String)
+    twelfth_subject2_marks_obtained = Column(Integer)
+    twelfth_subject2_total_marks = Column(Integer)
+    twelfth_subject3= Column(String)
+    twelfth_subject3_marks_obtained = Column(Integer)
+    twelfth_subject3_total_marks = Column(Integer)
+    twelfth_subject4= Column(String)
+    twelfth_subject4_marks_obtained = Column(Integer)
+    twelfth_subject4_total_marks = Column(Integer)
+    twelfth_subject5= Column(String)
+    twelfth_subject5_marks_obtained = Column(Integer)
+    twelfth_subject5_total_marks = Column(Integer)
+    twelfth_marksheet = Column(LargeBinary)
     community_certificate = Column(LargeBinary)
     passport_photo = Column(LargeBinary)
     preference1=Column(String)
@@ -157,32 +151,32 @@ class FormData2(BaseModel):
     mother_name: Optional[str]
     mother_occupation: Optional[str]
     mother_income: Optional[int]
-    _10th_exam_name: Optional[str]
-    _10th_register_no: Optional[str]
-    _10th_passing_date: Optional[str]
-    _10th_attempts: Optional[int]
-    _10_maths_marks: Optional[int]
-    _10th_science_marks: Optional[int]
-    _10th_total_marks: Optional[int]
-    _10th_max_marks: Optional[int]
-    _10th_school_address: Optional[str]
+    tenth_exam_name: Optional[str]
+    tenth_register_no: Optional[int]
+    tenth_passing_date: Optional[date]
+    tenth_attempts: Optional[int]
+    tenth_maths_marks: Optional[int]
+    tenth_science_marks: Optional[int]
+    tenth_total_marks: Optional[int]
+    tenth_max_marks: Optional[int]
+    tenth_school_address: Optional[str]
     Stream: Optional[str]
-    _12th_subject1: Optional[str]
-    _12th_subject1_marks_obtained: Optional[int]
-    _12th_subject1_total_marks: Optional[int]
-    _12th_subject2: Optional[str]
-    _12th_subject2_marks_obtained : Optional[int]
-    _12th_subject2_total_marks: Optional[int]
-    _12th_subject3: Optional[str]
-    _12th_subject3_marks_obtained: Optional[int]
-    _12th_subject3_total_marks: Optional[int]
-    _12th_subject4: Optional[str]
-    _12th_subject4_marks_obtained: Optional[int]
-    _12th_subject4_total_marks: Optional[int]
-    _12th_subject5: Optional[str]
-    _12th_subject5_marks_obtained: Optional[int]
-    _12th_subject5_total_marks: Optional[int]
-    _12th_marksheet : Optional[bytes]
+    twelfth_subject1: Optional[str]
+    twelfth_subject1_marks_obtained: Optional[int]
+    twelfth_subject1_total_marks: Optional[int]
+    twelfth_subject2: Optional[str]
+    twelfth_subject2_marks_obtained : Optional[int]
+    twelfth_subject2_total_marks: Optional[int]
+    twelfth_subject3: Optional[str]
+    twelfth_subject3_marks_obtained: Optional[int]
+    twelfth_subject3_total_marks: Optional[int]
+    twelfth_subject4: Optional[str]
+    twelfth_subject4_marks_obtained: Optional[int]
+    twelfth_subject4_total_marks: Optional[int]
+    twelfth_subject5: Optional[str]
+    twelfth_subject5_marks_obtained: Optional[int]
+    twelfth_subject5_total_marks: Optional[int]
+    twelfth_marksheet : Optional[bytes]
     community_certificate : Optional[bytes]
     passport_photo : Optional[bytes]
     preference1: Optional[str]
@@ -212,6 +206,13 @@ async def read_item(request: Request):
     user = request.session.get('user')
     if user:
         return templates.TemplateResponse("Home.html", {"request": request,"email_id":user["email"]})
+    else:
+        return templates.TemplateResponse("sign.html", {"request": request})
+@app.get("/about", response_class=HTMLResponse)
+async def read_item(request: Request):
+    user = request.session.get('user')
+    if user:
+        return templates.TemplateResponse("about.html", {"request": request,"email_id":user["email"]})
     else:
         return templates.TemplateResponse("sign.html", {"request": request})
 
@@ -247,7 +248,7 @@ async def read_item(request: Request):
     if user:
       return templates.TemplateResponse("personaldetails.html", {"request": request,"email_id":user["email"]})
     else:
-        return 'You need to <a href="/login">Login with Google</a> to access this page.'
+        return templates.TemplateResponse("sign.html", {"request": request})
 
 @app.post("/personal_details",response_class=HTMLResponse)
 async def stud_det_post(request:Request):
@@ -294,7 +295,6 @@ async def validate_data(request:Request,form_data: FormData1):
         db.commit()
         db.refresh(new_student if not existing_student else existing_student)
     except Exception as e:
-        print(e)
         raise HTTPException(status_code=500, detail="Internal server error")
     return {"message": "Data validated successfully", "form_data": "fwegf"}
 
@@ -313,7 +313,6 @@ async def stud_det_post(request:Request,form_data: FormData2):
         db.commit()
         db.refresh(new_student if not existing_student else existing_student)
     except Exception as e:
-        print(Exception)
         raise HTTPException(status_code=401, detail="{Exception}")
     return {"message": "Data validated successfully", "form_data": "fwegf"}
 

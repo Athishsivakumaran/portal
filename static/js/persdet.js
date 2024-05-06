@@ -115,20 +115,20 @@ function generateSubjectRow(labelNumber, subjectOptions, index) {
   return `<div class="form-row subject-row">
                     <div class="col-md-6 mb-3">
                         <label>Subject ${labelNumber}</label>
-                        <select class="form-control subject-select"  name="_12th_subject${index}" required>
-                            <option value="Select Subject" selected disabled>Select Subject</option>
+                        <select class="form-control subject-select"  name="twelfth_subject${index}" required>
+                            <option value="" selected disabled>Select Subject</option>
                             ${subjectOptions}
                         </select>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Marks Obtained</label>
-                        <input type="number" class="form-control marks-obtained" placeholder="Marks" name="_12th_subject${
+                        <input type="number" class="form-control marks-obtained" placeholder="Marks" name="twelfth_subject${
                           index + 1
                         }_marks_obtained" required>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label>Total Marks</label>
-                        <input type="number" class="form-control max-marks" placeholder="Total" name="_12th_subject${
+                        <input type="number" class="form-control max-marks" placeholder="Total" name="twelfth_subject${
                           index + 1
                         }_total_marks" value="100" required>
                     </div>
@@ -153,7 +153,7 @@ function addSubjectRows(subjectType) {
   <div class="col-md-6 mb-3">
       <label>Preference 1</label>
       <select class="form-control preference-select"  name="preference1" required>
-          <option value="Select Choice" selected disabled>Select Choice</option>
+          <option value="" selected disabled>Select Choice</option>
           <option value="Software Systems">Software Systems</option>
           <option value="Data Science">Data Science</option>
           <option value="Artificial Intelligence and Machine Learning">Artificial Intelligence and Machine Learning</option>
@@ -163,7 +163,7 @@ function addSubjectRows(subjectType) {
   <div class="col-md-6 mb-3">
   <label>Preference 2</label>
   <select class="form-control preference-select"  name="preference2" required>
-      <option value="Select Choice" selected disabled>Select Choice</option>
+      <option value="" selected disabled>Select Choice</option>
       <option value="Software Systems">Software Systems</option>
       <option value="Data Science">Data Science</option>
       <option value="Artificial Intelligence and Machine Learning">Artificial Intelligence and Machine Learning</option>
@@ -173,7 +173,7 @@ function addSubjectRows(subjectType) {
   <div class="col-md-6 mb-3">
   <label>Preference 3</label>
   <select class="form-control preference-select"  name="preference3" required>
-      <option value="Select Choice" selected disabled>Select Choice</option>
+      <option value="" selected disabled>Select Choice</option>
       <option value="Software Systems">Software Systems</option>
       <option value="Data Science">Data Science</option>
       <option value="Artificial Intelligence and Machine Learning">Artificial Intelligence and Machine Learning</option>
@@ -183,7 +183,7 @@ function addSubjectRows(subjectType) {
   <div class="col-md-6 mb-3">
   <label>Preference 4</label>
   <select class="form-control preference-select"  name="preference4" required>
-      <option value="Select Choice" selected disabled>Select Choice</option>
+      <option value="" selected disabled>Select Choice</option>
       <option value="Software Systems">Software Systems</option>
       <option value="Data Science">Data Science</option>
       <option value="Artificial Intelligence and Machine Learning">Artificial Intelligence and Machine Learning</option>
@@ -213,6 +213,8 @@ else{
 document.addEventListener("DOMContentLoaded", function () {
   const autosavedFormData =
     JSON.parse(localStorage.getItem("autosavedFormData")) || {};
+    addSubjectRows("science");
+
   for (const key in autosavedFormData) {
     if (Object.hasOwnProperty.call(autosavedFormData, key)) {
       const value = autosavedFormData[key];
@@ -223,7 +225,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
-addSubjectRows("science");
+var radioBtn1 = document.getElementById("scienceRadio");
+    radioBtn1.addEventListener("change", function() {
+        if (radioBtn1.checked) {
+            addSubjectRows("science");
+        }
+    });
+var radioBtn2 = document.getElementById("commerceRadio");
+    radioBtn2.addEventListener("change", function() {
+        if (radioBtn2.checked) {
+            addSubjectRows("commerce");
+        }
+    });
 const inputElements = document.querySelectorAll("input, select, textarea");
 inputElements.forEach(function (input) {
   input.addEventListener("input", function () {
@@ -236,13 +249,6 @@ inputElements.forEach(function (input) {
 });
 
 
-document.querySelectorAll('input[name="Stream"]').forEach(function (checkbox) {
-  checkbox.addEventListener("change", function () {
-    if (checkbox.checked) {
-      addSubjectRows(checkbox.value);
-    }
-  });
-});
 
 $(function () {
   $(document).on("change", "select", function () {
@@ -266,3 +272,16 @@ $(function () {
 });
 
 
+function calculateAge() {
+  var dobInput = document.getElementById("dob").value;
+  var dob = new Date(dobInput);
+  var today = new Date();
+
+  var age = today.getFullYear() - dob.getFullYear();
+  var monthDiff = today.getMonth() - dob.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+      age--;
+  }
+
+  document.getElementById("age").value = age;
+}

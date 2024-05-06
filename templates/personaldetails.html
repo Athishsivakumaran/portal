@@ -30,6 +30,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="/static/css/style.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
 </head>
 
 <body class="bg-grey">
@@ -44,9 +46,9 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-                    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                    <li><a class="nav-link scrollto active" href="/">Home</a></li>
+                    <li><a class="nav-link scrollto" href="/about">About Us</a></li>
+                    <li><a class="nav-link scrollto" href="/">Contact</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -141,22 +143,22 @@
                                         <label for="gender">Gender</label>
                                         <br>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="radio" name="gender" id="male">
+                                            <input class="form-check-input mt-1" type="radio" name="gender" value="male" id="male" required>
                                             <label class="form-check-label" for="male">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="radio" name="gender" id="female">
+                                            <input class="form-check-input mt-1" type="radio" name="gender" value="female" id="female" required>
                                             <label class="form-check-label" for="female">Female</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input mt-1" type="radio" name="gender" id="other">
+                                            <input class="form-check-input mt-1" type="radio" name="gender"  value="other" id="other" required>
                                             <label class="form-check-label" for="other">Other</label>
-                                        </div>
+                                    </div>
                                     </div>
                                     <div class="col-md-5 mb-3">
                                         <label for="dob">Date of Birth</label>
-                                        <input type="date" class="form-control datepicker" id="dob" name="dob"
-                                            placeholder="Select Date" required>
+                                        <input type="date" style="background-color:rgb(227, 231, 231);" class="form-control datepicker" id="dob" name="dob"
+                                            placeholder="Select Date" onchange="calculateAge()" required> 
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label for="age">Age</label>
@@ -166,7 +168,7 @@
                                             
                                         </div>
                                     </div>
-
+                                        </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3 ">
@@ -262,7 +264,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3 ">
                                         <label for="mother_income">Mother's Annual Income</label>
-                                        <input type="tel" class="form-control" id="mother_income" name="mother_income"
+                                        <input type="number" class="form-control" id="mother_income" name="mother_income"
                                             placeholder="Enter Mother's Income" required>
                                     </div>
                                 </div>
@@ -282,51 +284,51 @@
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3 ">
                                         <label for="exam_name">Name of The Examination</label>
-                                        <input type="text" class="form-control" id="exam_name" name="_10th_exam_name"
+                                        <input type="text" class="form-control" id="exam_name" name="tenth_exam_name"
                                             placeholder="Enter Examination Name" required>
                                     </div>
                                     <div class="col-md-3 mb-3 ">
                                         <label for="register_number">Register Number</label>
-                                        <input type="text" class="form-control" id="register_number"
-                                            name="_10th_register_no" placeholder="Enter Register Number" required>
+                                        <input type="number" class="form-control" id="register_number"
+                                            name="tenth_register_no" placeholder="Enter Register Number" required>
                                     </div>
                                     <div class="col-md-3 mb-3 ">
                                         <label for="passing_date">Month & Year of Passing</label>
                                         <input type="date" class="form-control datepicker" id="passing_date"
-                                            name="_10th_passing_date" placeholder="Select Date" required>
+                                            name="tenth_passing_date"style="background-color:rgb(227, 231, 231);" placeholder="Select Date" required>
                                     </div>
                                     <div class="col-md-3 mb-3 ">
                                         <label for="attempts">No. of Attempts</label>
                                         <input type="number" class="form-control" id="attempts"
-                                            placeholder="Enter No. of Attempts" name="_10th_attempts" required>
+                                            placeholder="Enter No. of Attempts" name="tenth_attempts" required>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label for="maths_marks">Marks in Maths</label>
                                         <input type="number" class="form-control" id="maths_marks"
-                                            name="_10th_maths_marks" placeholder="Enter Marks in Maths" required>
+                                            name="tenth_maths_marks" placeholder="Enter Marks in Maths" required>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="science_marks">Marks in Science</label>
                                         <input type="number" class="form-control" id="science_marks"
-                                            name="_10th_science_marks" placeholder="Enter Marks in Science" required>
+                                            name="tenth_science_marks" placeholder="Enter Marks in Science" required>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="total_marks">Total Marks Obtained</label>
                                         <input type="number" class="form-control" id="total_marks"
-                                            name="_10th_total_marks" placeholder="Enter Total Marks Obtained" required>
+                                            name="tenth_total_marks" placeholder="Enter Total Marks Obtained" required>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label for="max_marks">Maximum Marks</label>
                                         <input type="number" class="form-control" id="max_marks"
-                                            placeholder="Enter Maximum Marks" name="_10th_max_marks" required>
+                                            placeholder="Enter Maximum Marks" name="tenth_max_marks" required>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-md-12 mb-3 ">
                                         <label for="school_name">School Name with Full Address</label>
-                                        <textarea class="form-control" id="school_name" name="_10th_school_address"
+                                        <textarea class="form-control" id="school_name" name="tenth_school_address"
                                             placeholder="Enter School Name with Full Address" rows="3"
                                             required></textarea>
                                     </div>
@@ -360,7 +362,7 @@
                                         <h3>Upload 12th Marksheet</h3>
                                         <h4>Select File here</h4>
                                         <p>Files Supported: PDF</p>
-                                        <input type="file" class="btn-red-outline btn-block mb-4"  accept=".pdf" id="12th_marksheet" name="_12th_marksheet" required>
+                                        <input type="file" class="btn-red-outline btn-block mb-4"  accept=".pdf" id="12th_marksheet" name="twelfth_marksheet" required>
 
                                         
                                     </div>
